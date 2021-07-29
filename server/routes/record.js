@@ -1,4 +1,5 @@
 const express = require("express");
+const { GridFSBucket } = require("mongodb");
 var uniqid = require("uniqid");
 
 // recordRoutes is an instance of the express router.
@@ -68,7 +69,6 @@ recordRoutes.route("/update/:rid").post(function (req, res) {
 recordRoutes.route("/:rid").delete((req, res) => {
   let db_connect = dbo.getDb("employees");
   var myquery = { rid: req.params.rid };
-  console.log(myquery);
   db_connect.collection("records").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
